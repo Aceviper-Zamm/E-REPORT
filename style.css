@@ -18,6 +18,11 @@ section {
     padding-bottom: 50px;
 }
 
+footer {
+    margin-top: 100px;
+    padding-bottom: 20px;
+}
+
 
 @media screen and (max-width: 510px) {
     .hero .col img {
