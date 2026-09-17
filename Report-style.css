@@ -18,9 +18,21 @@ section {
     padding-bottom: 50px;
 }
 
+.kategori {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 footer {
     margin-top: 100px;
     padding-bottom: 20px;
+}
+
+.copyright {
+    margin-top: 40px;
+}
+
+.hero .col:nth-child(1) {
+    --animte-delay: 0.5s;
 }
 
 
