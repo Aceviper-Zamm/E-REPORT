@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Reports | E-Report IDN Boarding School</title>
+    <link rel="shortcut icon" href="../img/IDN.png" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../STYLE/Report-style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top animate__animated animate__fadeInDown">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center text-white me-4" href="Report-index.html">
+                <img src="../img/IDN.png" alt="Logo IDN" width="38" class="d-inline-block align-text-top rounded me-2 border border-white border-2">
+                <span class="fw-bold fs-5">E-Report IDN</span>
+            </a>
+            <button class="navbar-toggler shadow-none border-0 text-white p-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars text-white fs-4"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2 gap-lg-3 gap-xl-4 pt-3 pt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-index.html#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-index.html#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-index.html#service">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-index.html#recent">Recent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Report-Learnmore.html">All Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-index.html#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Report-Panduan.html">
+                            <i class="fa-solid fa-book-open me-1"></i> Guide
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-light-custom px-3 py-2" data-bs-toggle="modal" data-bs-target="#addReportModal">
+                            <i class="fa-solid fa-plus me-1"></i> Let's Start (Create Report)
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-primary text-white py-5">
+        <div class="container py-lg-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="fw-bold mb-1 display-6">All Reports</h1>
+                    <p class="text-white text-opacity-90 mb-0 fs-6">Browse all reports that have been submitted, filter by category or search by keyword.</p>
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1000">
+                    <button class="btn btn-light-custom px-4 py-2" data-bs-toggle="modal" data-bs-target="#addReportModal">
+                        <i class="fa-solid fa-plus me-1"></i> Add Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="all-report" class="py-5 bg-white">
+        <div class="container py-lg-4">
+            <div id="alertSuccessSubmit" class="alert alert-success alert-dismissible fade d-none shadow-sm mb-4" role="alert">
+                <i class="fa-solid fa-circle-check me-2 fs-5 align-middle"></i>
+                <strong>Success!</strong> Your new report has been successfully submitted and saved in the system.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="card p-3 p-md-4 my-3 bg-light border-0 shadow-sm" data-aos="fade-up" data-aos-duration="1000">
+                <div class="row g-3 align-items-center">
+                    <div class="col-12 col-md-5">
+                        <input id="searchInput" type="text" class="form-control shadow-sm" placeholder="Search reports by title or keyword...">
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <select id="categoryFilter" class="form-select shadow-sm">
+                            <option value="all" selected>All Categories</option>
+                            <option value="Facility">Facility</option>
+                            <option value="Lab & IT">Computer & Network Lab</option>
+                            <option value="Academic">Academic</option>
+                            <option value="Dormitory">Dormitory</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <select id="statusFilter" class="form-select shadow-sm">
+                            <option value="all" selected>All Statuses</option>
+                            <option value="Completed">Completed</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <button id="btnResetFilter" class="btn btn-primary w-100 text-white shadow-sm rounded-pill">
+                            <i class="fa-solid fa-filter me-1"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reportsGrid" class="row g-4 mt-3">
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Facility" data-status="In Progress">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Facility</a>
+                        </div>
+                        <img src="../img/report_ac.jpg" class="card-img-top report-card-img" alt="Classroom AC not cooling">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Classroom AC not cooling
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">Dave</a> 2 days ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                The split AC at the back of the classroom is not cooling and only blowing normal room temperature air during afternoon classes.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Facility" data-status="In Progress">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Facility</a>
+                        </div>
+                        <img src="../img/report_water.jpg" class="card-img-top report-card-img" alt="Dormitory 2nd floor water tap stopped">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Dormitory 2nd floor water tap stopped
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">David</a> 2 hours ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                Clean water supply for ablution and bathrooms on the 2nd floor dormitory has stopped completely since morning. Main roof pump radar check needed.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Lab & IT" data-status="Completed">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Lab & IT</a>
+                        </div>
+                        <img src="../img/report_switch.jpg" class="card-img-top report-card-img" alt="Computer lab switch hub error">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Computer lab switch hub error
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">Draco</a> 1 day ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                LAN cable connection on 6 middle workstations cannot connect to the gateway router during practical session.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Dormitory" data-status="In Progress">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Dormitory</a>
+                        </div>
+                        <img src="../img/report_hallway.jpg" class="card-img-top report-card-img" alt="Dormitory hallway lights out">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Dormitory hallway lights out
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">Anonymous</a> 3 days ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                Two fluorescent lights in the main hallway of Dormitory Block B are burned out, leaving the walkway dark at night.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Lab & IT" data-status="Completed">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Lab & IT</a>
+                        </div>
+                        <img src="../img/report_projector.jpg" class="card-img-top report-card-img" alt="Damaged HDMI cable on lab projector">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Damaged HDMI cable on lab projector
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">Raihan</a> 4 days ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                The projector display frequently flickers and turns green because the HDMI cable pin at the teacher workstation is loose.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 report-item" data-category="Facility" data-status="Pending">
+                    <div class="card shadow-sm h-100 overflow-hidden">
+                        <div class="kategori position-absolute px-3 py-1">
+                            <a class="text-white text-decoration-none small" href="Report-Detail.html">Facility</a>
+                        </div>
+                        <img src="../img/report_socket.jpg" class="card-img-top report-card-img" alt="Loose power outlet on lab desk">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">
+                                <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                    Loose power outlet on lab desk
+                                </a>
+                            </h5>
+                            <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">Zaid</a> 5 days ago.</small>
+                            <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                                The power socket at Desk 3 in the Software Engineering Lab often creates small sparks when plugging in a laptop adapter.
+                            </p>
+                            <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                                Read More...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="noResultsMsg" class="text-center py-5 d-none text-secondary">
+                <p>No reports matched your search criteria.</p>
+            </div>
+
+            <nav aria-label="Page navigation" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link bg-primary text-white border-primary" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link text-primary" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-primary" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link text-primary" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <div class="modal fade" id="addReportModal" tabindex="-1" aria-labelledby="addReportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-semibold" id="addReportModalLabel">
+                        <i class="fa-solid fa-pen-to-square me-2"></i> Create New Report
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="addReportForm">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold" for="formTitle">Report Title</label>
+                            <input id="formTitle" class="form-control" type="text" placeholder="Insert the report title..." required>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" for="formCategory">Category</label>
+                                <select id="formCategory" class="form-select" required>
+                                    <option value="" disabled selected>Choose Category</option>
+                                    <option value="Facility">Facility</option>
+                                    <option value="Lab & IT">Skills & Lab IT</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Dormitory">Dormitory</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" for="formLocation">Location</label>
+                                <input id="formLocation" class="form-control" type="text" placeholder="e.g. Lab 2, Dormitory 2nd Floor" required>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-7">
+                                <label class="form-label fw-semibold" for="formAuthor">Your Name</label>
+                                <input id="formAuthor" class="form-control" type="text" placeholder="Name & Class (e.g. Dave - 10 RPL B)">
+                            </div>
+                            <div class="col-md-5 d-flex align-items-end">
+                                <div class="form-check form-switch pb-2">
+                                    <input class="form-check-input" type="checkbox" id="formAnonymous">
+                                    <label class="form-check-label text-secondary small fw-semibold" for="formAnonymous">Send as Anonymous</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold" for="formDesc">Report Description</label>
+                            <textarea id="formDesc" class="form-control" rows="4" placeholder="Write your report details..." required></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold" for="formImage">Upload Image</label>
+                            <input id="formImage" class="form-control" type="file" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary text-white rounded-pill px-4">
+                            <i class="fa-solid fa-paper-plane me-1"></i> Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white">
+        <div class="container">
+            <div class="row row-gap-4 justify-content-between text-white text-center text-md-start">
+                <div class="col-12 col-md-4">
+                    <div class="mb-3 d-flex gap-2 align-items-center justify-content-center justify-content-md-start">
+                        <img class="d-inline-block align-text-top rounded border border-white border-2" width="32" src="../img/IDN.png" alt="IDN Logo">
+                        <h4 class="mb-0 fw-bold text-white">E-Report IDN</h4>
+                    </div>
+                    <p class="lh-lg m-0 text-white text-opacity-80 small">
+                        Aspiration and facility reporting service of SMK IDN Boarding School. Voice your aspirations for our shared comfort.
+                    </p>
+                </div>
+                <div class="col-6 col-md-2">
+                    <h5 class="fw-bold mb-3 text-white">Menu</h5>
+                    <div class="d-flex flex-column gap-2">
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-index.html#hero">Home</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-index.html#about">About</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-index.html#service">Services</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-index.html#recent">Recent</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-Learnmore.html">All Reports</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-index.html#faq">FAQ</a>
+                        <a class="text-decoration-none text-white text-opacity-80 small" href="Report-Panduan.html">Guide</a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-3 mt-md-0">
+                    <h5 class="fw-bold mb-3 text-white">Contact Us</h5>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="mailto:azzampangestu11@gmail.com" class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 text-decoration-none text-white text-opacity-80 small">
+                            <i class="fa-solid fa-envelope"></i>
+                            azzampangestu11@gmail.com
+                        </a>
+                        <a href="https://wa.me/6287777888823" target="_blank" class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 text-decoration-none text-white text-opacity-80 small">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            +62 87777888823
+                        </a>
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 text-white text-opacity-80 small">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Jl. Raya Dayeuh, Jonggol, Bogor
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright text-center small text-white text-opacity-75">
+                <p class="mb-0">&copy; Copyright by <span class="fw-bold text-white">RPL B</span> 2026, All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+
+        const addReportForm = document.getElementById('addReportForm');
+        const alertSuccess = document.getElementById('alertSuccessSubmit');
+        const reportsGrid = document.getElementById('reportsGrid');
+        const modalEl = document.getElementById('addReportModal');
+        const formAnonymous = document.getElementById('formAnonymous');
+        const formAuthor = document.getElementById('formAuthor');
+
+        formAnonymous.addEventListener('change', function () {
+            if (this.checked) {
+                formAuthor.value = 'Anonymous';
+                formAuthor.disabled = true;
+            } else {
+                formAuthor.value = '';
+                formAuthor.disabled = false;
+            }
+        });
+
+        addReportForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('formTitle').value;
+            const category = document.getElementById('formCategory').value;
+            const desc = document.getElementById('formDesc').value;
+            const author = formAnonymous.checked ? 'Anonymous' : (formAuthor.value.trim() || 'Dave');
+
+            const newCol = document.createElement('div');
+            newCol.className = 'col-12 col-md-6 col-lg-4 report-item animate__animated animate__fadeInDown';
+            newCol.setAttribute('data-category', category);
+            newCol.setAttribute('data-status', 'Pending');
+
+            const imgMap = {
+                'Facility': '../img/report_ac.jpg',
+                'Lab & IT': '../img/report_switch.jpg',
+                'Academic': '../img/report_projector.jpg',
+                'Dormitory': '../img/report_water.jpg'
+            };
+            const chosenImg = imgMap[category] || '../img/report_ac.jpg';
+
+            newCol.innerHTML = `
+                <div class="card shadow-sm h-100 overflow-hidden">
+                    <div class="kategori position-absolute px-3 py-1">
+                        <a class="text-white text-decoration-none small" href="Report-Detail.html">${category}</a>
+                    </div>
+                    <img src="${chosenImg}" class="card-img-top report-card-img" alt="${title}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">
+                            <a href="Report-Detail.html" class="text-dark text-decoration-none">
+                                ${title}
+                            </a>
+                        </h5>
+                        <small class="text-muted">By: <a class="text-decoration-none text-primary" href="Report-Detail.html">${author}</a> Just now.</small>
+                        <p class="card-text text-secondary mt-3 mb-4 small lh-base flex-grow-1">
+                            ${desc}
+                        </p>
+                        <a href="Report-Detail.html" class="btn btn-primary text-white w-100 rounded-pill">
+                            Read More...
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            reportsGrid.insertBefore(newCol, reportsGrid.firstChild);
+
+            const bsModal = bootstrap.Modal.getInstance(modalEl);
+            if (bsModal) {
+                bsModal.hide();
+            }
+
+            addReportForm.reset();
+            formAuthor.disabled = false;
+
+            alertSuccess.classList.remove('d-none');
+            alertSuccess.classList.add('show');
+            setTimeout(() => {
+                alertSuccess.classList.remove('show');
+                setTimeout(() => alertSuccess.classList.add('d-none'), 300);
+            }, 4000);
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const btnResetFilter = document.getElementById('btnResetFilter');
+        const noResultsMsg = document.getElementById('noResultsMsg');
+
+        function filterReports() {
+            const query = searchInput.value.toLowerCase().trim();
+            const cat = categoryFilter.value;
+            const stat = statusFilter.value;
+            const items = document.querySelectorAll('.report-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const itemStat = item.getAttribute('data-status');
+                const text = item.textContent.toLowerCase();
+
+                const matchesQuery = query === '' || text.includes(query);
+                const matchesCat = cat === 'all' || itemCat === cat;
+                const matchesStat = stat === 'all' || itemStat === stat;
+
+                if (matchesQuery && matchesCat && matchesStat) {
+                    item.classList.remove('d-none');
+                    visibleCount++;
+                } else {
+                    item.classList.add('d-none');
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResultsMsg.classList.remove('d-none');
+            } else {
+                noResultsMsg.classList.add('d-none');
+            }
+        }
+
+        searchInput.addEventListener('input', filterReports);
+        categoryFilter.addEventListener('change', filterReports);
+        statusFilter.addEventListener('change', filterReports);
+        btnResetFilter.addEventListener('click', function () {
+            searchInput.value = '';
+            categoryFilter.value = 'all';
+            statusFilter.value = 'all';
+            filterReports();
+        });
+    </script>
+</body>
+
+</html>
